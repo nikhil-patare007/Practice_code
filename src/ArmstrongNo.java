@@ -11,6 +11,6 @@ public class ArmstrongNo {
         if(temp == sum)
             System.out.println("Armstrong");
         else
-            System.out.println("nOt");
+            System.out.println("not");
     }
 }
