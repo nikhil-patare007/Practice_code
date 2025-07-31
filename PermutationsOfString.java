@@ -1,31 +1,34 @@
-package test;
+package Java2025;
 
 public class PermutationsOfString {
+
     public static void main(String[] args) {
-        String str = "ABCD";
-        int len = str.length();
-        generatePerms(str, 0, len);
+        /*First call: generatePermutations("", "ABC")
+
+        Picks 'A' → next: generatePermutations("A", "BC")
+
+        Picks 'B' → next: generatePermutations("AB", "C")
+
+        Picks 'C' → now: generatePermutations("ABC", "") → prints "ABC"*/
+
+        String input = "ABC";
+
+        System.out.println("Permutations of " + input + ":");
+
+        generatePermutations("", input);
+
     }
 
-    public static String swap(String str, int i, int j) {
-        char[] arr = str.toCharArray();
-        char tmp;
-        tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-        return String.valueOf(arr);
-    }
-    static String generatePerms(String str, int start, int end) {
-
-        if (start == end - 1) {
-            System.out.println(str);
+    static void generatePermutations(String prefix, String remaining) {
+        if (remaining.isEmpty()) {
+            System.out.println(prefix);
         } else {
-            for (int i = start; i < end; i++) {
-                str = swap(str, start, i);
-                generatePerms(str, start+1, end);
-                str = swap(str, start, i);
+            for (int i = 0; i < remaining.length(); i++) {
+                generatePermutations(
+                        prefix + remaining.charAt(i),
+                        remaining.substring(0, i) + remaining.substring(i + 1)
+                );
             }
         }
-        return str;
     }
 }

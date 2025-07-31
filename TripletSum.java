@@ -1,25 +1,50 @@
-package test;
+package Java2025;
 
-import java.util.HashSet;
+import java.util.Arrays;
 
 public class TripletSum {
+
     public static void main(String[] args) {
 
-        int [] arr= { 1, 4, 45, 6, 10, 8 };
-        int sum = 22;
+        int[] nums = {1, 4, 2, 3, 5, 7, 0, -1};
+        int target = 6;
+
+        findTriplets(nums, target);
 
 
-        HashSet<Integer> set = new HashSet<>();
-        for (int i = 0; i < arr.length-2; i++) {
-            int curr_sum = sum - arr[i];
+    }
 
-            for (int j = i+1; j < arr.length; j++) {
-                if(set.contains(curr_sum-arr[j])) {
-                    System.out.println("Triplet is " + arr[i]+" "+arr[j]+" "+(curr_sum - arr[j]));
+
+    public static void findTriplets(int [] nums, int target) {
+
+        int n = nums.length;
+        boolean found = false;
+
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length-2; i++) {
+            int left = i +1;
+            int right = n-1;
+
+            while (left < right) {
+
+             int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == target) {
+                    found = true;
+                    System.out.println(nums[i] + " " + nums[left] + " " + nums[right]);
+                    left++;
+                    right--;
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
                 }
-                set.add(arr[j]);
+            }
+
+            if(!found) {
+                System.out.println("No triplet found");
             }
         }
-        System.out.println(set.size());
     }
 }
